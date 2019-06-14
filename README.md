@@ -1,4 +1,4 @@
 # LearningPython
 
 ![](StalkerBabyPythonProgram.gif)
-![](pyfiglet module.gif)
+![](pyfiglet_module.gif)
