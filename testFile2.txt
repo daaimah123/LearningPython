@@ -1,1 +1,6 @@
 This is a test file contents
+blah blah another line
+I am adding another line to this file now!
+blah blah another line blah blah another line
+blah blah another line blah blah another line blah blah another line
+blah blah another line blah blah another line blah blah another line blah blah another line
