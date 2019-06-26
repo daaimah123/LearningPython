@@ -25,7 +25,8 @@ print(card3)
 # Deck  should have an instance method called shuffle  which will shuffle a full deck of cards. If there are cards missing from the deck, this method should return a ValueError  with the message "Only full decks can be shuffled".  shuffle should return the shuffled deck.
 # Deck  should have an instance method called deal_card  which uses the _deal  method to deal a single card from the deck and return that single card.
 # Deck  should have an instance method called deal_hand  which accepts a number and uses the _deal  method to deal a list of cards from the deck and return that list of cards.
-# from random import randrange
+
+from random import shuffle
 
 class Deck: 
     def __init__(self):
@@ -42,20 +43,13 @@ class Deck:
         return len(self.cards)
     def _deal(self, num):
         card_num = self.count()
-        min([card_num, num])
-
+        actual = min([card_num, num])
+        if card_num == 0:
+            raise ValueError("All cards have been dealt")
+        cards = self.cards[-actual:]
+          self.cards = self.cards[:-actual]
+        return cards
+    
 d1 = Deck()
+print(d1._deal(3))
 print(d1)
-
-    # def _deal(self, num, card_num):
-    #     removed_cards = self.card_num - num
-    #     if num > self.card_num: 
-    #         return self.card_num - (num - self.card_num)
-    #     elif self.card_num == 0:
-    #         raise ValueError("All cards have been dealt")
-    # def shuffle(self, card_num):
-    #     if card_num == 52:
-    #         for i in range(52)
-    #             return randrange(1, 52) # doesnt account for repeateded nums
-    #     else: 
-    #         raise ValueError("Only full decks can be shuffled")
