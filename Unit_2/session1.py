@@ -43,18 +43,26 @@ sequence = [1, 6, -1, 10]
 
 '''
 this solution does not keep the sequence ordered
-if keeping order, use index as a tracker to solve
-
-Index = 0
-For num in lst
-    If num == sequence[index]
-    Index += 1
-If index == len(sequence):
-    Return True
-Return False
+if keeping order, use index as a tracker to solve (see sorted_subsequence)
 '''
+def sorted_subsequence(lst, sequence):
+    # init tracker index value beginning at zero
+    val_index = 0
+    # iterate over 'lst' elements
+    for num in lst:
+        # confirm that 'lst' element and 'sequence' element are the same value
+        if num == sequence[val_index]:
+            # increment the index value to move to next sequence element
+            val_index += 1
+            # confirm that there are no more sequence elements to check for
+            if val_index == len(sequence):
+                return True
+    # no complete subsequence found
+    return False
 
-
+lst = [5, 1, 22, 25, 6, -1, 8, 10, -1]
+sequence = [1, 6, -1, 10]
+# print(sorted_subsequence(lst, sequence))
 
 '''
 ~~~~~~~~~~~~~~ Problem 2 ~~~~~~~~~~~~~~
@@ -121,7 +129,7 @@ def print_pair(dict, tar):
         # print_statement = concatenate f'Key: {tar} \nValue: {value_var}'
         # print(f'Key: {tar} \nValue: {corresponding_value}')
    
-    ==== Optimized Solution (below) ====
+    ==== Optimized Ternary Solution (below) ====
     '''
     print(f'Key: {tar} \nValue: {dict[tar]}' if tar in dict.keys() else 'That pair does not exist!')
 
