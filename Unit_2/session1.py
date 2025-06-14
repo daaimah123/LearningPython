@@ -41,6 +41,20 @@ lst = [5, 1, 22, 25, 6, -1, 8, 10, -1]
 sequence = [1, 6, -1, 10]
 # print(is_subsequence(lst, sequence))
 
+'''
+this solution does not keep the sequence ordered
+if keeping order, use index as a tracker to solve
+
+Index = 0
+For num in lst
+    If num == sequence[index]
+    Index += 1
+If index == len(sequence):
+    Return True
+Return False
+'''
+
+
 
 '''
 ~~~~~~~~~~~~~~ Problem 2 ~~~~~~~~~~~~~~
@@ -159,11 +173,11 @@ def keys_v_values(dict):
 
 dict1 = {1:10, 2:20, 3:30, 4:40, 5:50, 6:60}
 greater_sum = keys_v_values(dict1)
-print(greater_sum)
+# print(greater_sum)
 
 dict2 = {100:10, 200:20, 300:30, 400:40, 500:50, 600:60}
 greater_sum = keys_v_values(dict2)
-print(greater_sum)
+# print(greater_sum)
 
 '''
 ~~~~~~~~~~~~~~ Problem 5 ~~~~~~~~~~~~~~
