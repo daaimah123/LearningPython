@@ -3,10 +3,7 @@
 # =======================================
 '''
 ~~~~~~~~~~~~~~ Problem 1 ~~~~~~~~~~~~~~
-Write a function is_subsequence() that takes in a list of integers lst and a list of integers sequence as parameters. Given these two lists, determine whether the sequence list is a subsequence of the lst list. A subsequence of a list is a set of numbers that aren't necessarily adjacent but are in the same relative order as they appear in the list. Return True if sequence is a subsequence, and False otherwise.
-
-def is_subsequence(lst, sequence):
-    pass
+Write a function is_subsequence() that takes in a list of integers 'lst' and a list of integers 'sequence' as parameters. Given these two lists, determine whether the 'sequence' list is a subsequence of the 'lst' list. A subsequence of a list is a set of numbers that aren't necessarily adjacent but are in the same relative order as they appear in the list. Return True if sequence is a subsequence, and False otherwise.
 
 Example Usage:
 lst = [5, 1, 22, 25, 6, -1, 8, 10]
@@ -15,14 +12,41 @@ print(is_subsequence(lst, sequence))
 Example Output: True
 '''
 
+# Clarification: if all elements in sequence are present in the lst
+# Learning: import needed for default dict
+from collections import defaultdict
+
+def is_subsequence(lst, sequence):
+    # init a dictionary
+    holding = defaultdict()
+    # compare elements of sequence to elements of lst by iterating over each of their respective element
+    for i in sequence:
+        for j in lst:
+            # if equal add element as key to dictionary and set value to an incremented count by 1
+            if i == j:
+                holding[i] = holding.get(i, 0) + 1
+            # if not equal add element as key to dictionary and set value to zero
+            elif i != j:
+                holding[i] = holding.get(i, 0)
+    
+    # check if one of the values is a zero
+    zero_value_exists = 0 in holding.values()
+    # if the value is a zero, then there is no subsequence containing all subsequence elements, otherwise there is
+    if zero_value_exists:
+        return False
+    else:
+        return True
+            
+lst = [5, 1, 22, 25, 6, -1, 8, 10, -1]
+sequence = [1, 6, -1, 10]
+# print(is_subsequence(lst, sequence))
+
+
 '''
 ~~~~~~~~~~~~~~ Problem 2 ~~~~~~~~~~~~~~
 Write a function create_dictionary() that takes in a list of keys and a list of values as parameters. The function returns a dictionary where each item in keys is paired with a corresponding item in values.
 
 keys[i] should be paired with values[i] in the dictionary where 0 <= i <= len(keys). You may assume keys and values are the same length.
-
-def create_dictionary(keys, values):
-    pass
 
 Example Input:
 keys = ["peanut", "dragon", "star", "pop", "space"]
@@ -31,13 +55,28 @@ values = ["butter", "fly", "fish", "corn", "ship"]
 Example Output:
 {"peanut": "butter", "dragon": "fly", "star": "fish", "pop": "corn", "space": "ship"}
 '''
+# input: two lists (one of keys and one of values)
+# output: single dictionary with keys and values paired
+# condition: keys[i] paired with values[i] where 0 <= i <= len(keys); keys and values same length
+# keys and values params names are not useful and can be mistaken for a keyword, changing to 'kys' and 'vals'
+def create_dictionary(kys, vals):
+    # init a defaultdict()
+    paired_key_values = defaultdict(int) # dict(zip())
+    # find corresponding index elements for 'kys' and 'vals' lists
+    for i in kys:
+        for j in vals:
+            if vals.index(j) == kys.index(i):
+                paired_key_values[i] = j
+    # make dictionary =into=> {kys : vals}
+    return paired_key_values
+    
 
+kys = ["peanut", "dragon", "star", "pop", "space"]
+vals = ["butter", "fly", "fish", "corn", "ship"]
+# print(create_dictionary(kys, vals))
 '''
 ~~~~~~~~~~~~~~ Problem 3 ~~~~~~~~~~~~~~
-Write a function print_pair() that takes in a dictionary dictionary and a key target as parameters. The function looks for the target and when found, it prints the key and it's associated value as "Key: <key>" followed by "Value: <value>". If target is not in dictionary, print "That pair does not exist!".
-
-def print_pair(dictionary, target):
-    pass
+Write a function print_pair() that takes in a dictionary 'dict' and a key 'tar' as parameters. The function looks for the 'tar' and when found, it prints the key and it's associated value as "Key: <key>" followed by "Value: <value>". If 'tar' is not in dictionary, print "That pair does not exist!".
 
 Example Usage:
 dictionary = {"spongebob": "squarepants", "patrick": "star", "squidward": "tentacles"}
@@ -52,18 +91,39 @@ That pair does not exist!
 Key: spongebob
 Value: squarepants
 '''
+def print_pair(dict, tar):
+    '''
+    ==== Brute Force Solution ====
+    paired_characters = defaultdict(str)
+    # identify if key is present in the dictionary
+    # tar_key_present = tar in dict.keys()
+    # if not present print 'That pair does not exist!'
+    # if tar_key_present == False:
+        # print('That pair does not exist!')
+    # if present 
+    # else:
+        # value_var = find value using index or key
+        # corresponding_value = dict[tar]
+        # print_statement = concatenate f'Key: {tar} \nValue: {value_var}'
+        # print(f'Key: {tar} \nValue: {corresponding_value}')
+   
+    ==== Optimized Solution (below) ====
+    '''
+    print(f'Key: {tar} \nValue: {dict[tar]}' if tar in dict.keys() else 'That pair does not exist!')
+
+dict = {"spongebob": "squarepants", "patrick": "star", "squidward": "tentacles"}
+# print_pair(dict, "patrick")
+# print_pair(dict, "plankton")
+# print_pair(dict, 'spongebob')
 
 '''
 ~~~~~~~~~~~~~~ Problem 4 ~~~~~~~~~~~~~~
-Write a function keys_v_values() that takes in a dictionary dictionary whose keys and values are both integers. The function should find the sum of all keys in the dictionary and the sum of all values.
+Write a function keys_v_values() that takes in a dictionary 'dict' whose keys and values are both integers. The function should find the sum of all keys in the dictionary and the sum of all values.
 If the sum of all keys is greater than the sum of all values, the function should return the string "keys".
 If the sum of all values is greater than the sum of all keys, the function should return the string "values".
 If keys and values have equal sums, the function should return the string "balanced".
 
-def keys_v_values(dictionary):
-    pass
 Example Usage:
-
 dictionary1 = {1:10, 2:20, 3:30, 4:40, 5:50, 6:60}
 greater_sum = keys_v_values(dictionary1)
 print(greater_sum)
@@ -71,19 +131,46 @@ print(greater_sum)
 dictionary2 = {100:10, 200:20, 300:30, 400:40, 500:50, 600:60}
 greater_sum = keys_v_values(dictionary2)
 print(greater_sum)
-Example Output:
 
+Example Output:
 values
 keys
-💡 Hint: Accessing Keys, Values, and Key-Value Pairs
 '''
+
+def keys_v_values(dict):
+    # init a key and value count
+    key_count = 0
+    value_count = 0
+    # iterate over all keys and find values
+    for i in dict:
+        # add each key-numeric-value to the key count
+        key_count += i
+        # add each value-numeric-value to the value count
+        value_count += dict[i]
+    # sum_keys > sum_vals return 'keys'
+    if key_count > value_count:
+        return 'keys'
+    # sum_vals > sum_keys return 'values'
+    elif value_count > key_count:
+        return 'values'
+    # sum_keys = sum_vals return 'balanced'
+    else: 
+        return 'balanced'
+
+dict1 = {1:10, 2:20, 3:30, 4:40, 5:50, 6:60}
+greater_sum = keys_v_values(dict1)
+print(greater_sum)
+
+dict2 = {100:10, 200:20, 300:30, 400:40, 500:50, 600:60}
+greater_sum = keys_v_values(dict2)
+print(greater_sum)
 
 '''
 ~~~~~~~~~~~~~~ Problem 5 ~~~~~~~~~~~~~~
 Write a function restock_inventory() that updates an inventory dictionary based on a restock list. It accepts two parameters:
 
-current_inventory: a dictionary where each key-value pair represents an item and its current stock in the inventory
-restock_list: a dictionary where each key-value pair represents an item and the quantity to be added to the inventory
+'current_inventory': a dictionary where each key-value pair represents an item and its current stock in the inventory
+'restock_list': a dictionary where each key-value pair represents an item and the quantity to be added to the inventory
 If an item in restock_list is not present in the current_inventory, it should be added. The function should return the updated dictionary current_inventory.
 
 def restock_inventory(current_inventory, restock_list):
